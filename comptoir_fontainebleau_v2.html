@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="slides-format" content="viewport">
+  <title>Le Comptoir Fontainebleau — Version Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">
+    @theme {
+      --color-bg: #0b2242;
+      --color-bg-deep: #08182f;
+      --color-surface: #11335f;
+      --color-text: #f8fbff;
+      --color-text-secondary: #d9e4f2;
+      --color-text-muted: #9eb3cb;
+      --color-accent-1: #49c3c3;
+      --color-accent-2: #ffffff;
+      --color-accent-3: #2f6db5;
+      --color-glass-bg: rgba(255,255,255,0.07);
+      --color-glass-border: rgba(255,255,255,0.12);
+      --color-vignette: rgba(0,0,0,0.34);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Inter', sans-serif;
+    }
+  </style>
+  <style>
+    :root { --color-bg:#0b2242; --color-text:#f8fbff; --glow-color-rgb:73,195,195; }
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{background:var(--color-bg);margin:0}
+    body{font-family:var(--font-body);color:var(--color-text);overflow:hidden;height:100vh;width:100vw}
+    .deck{width:100vw;height:100vh;position:relative}
+    .slide{position:absolute;inset:0;background:linear-gradient(135deg,#0b2242 0%,#173f75 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transform:scale(.95);transition:opacity .7s ease,transform .7s ease;pointer-events:none;overflow:hidden}
+    .slide.active{opacity:1;transform:scale(1);pointer-events:all}
+    .slide>.content{position:relative;z-index:2;width:100%;max-width:1160px;padding:clamp(1.5rem,4vw,4rem)}
+    .nav-controls{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:16px;z-index:100;background:rgba(8,24,47,.65);backdrop-filter:blur(10px);padding:10px 24px;border-radius:40px;border:1px solid rgba(255,255,255,.08)}
+    .nav-btn{width:40px;height:40px;border:none;background:rgba(255,255,255,.08);color:#49c3c3;border-radius:50%;font-size:1.2rem;cursor:pointer}
+    .slide-dots{display:flex;gap:8px}.slide-dots .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18);cursor:pointer}.slide-dots .dot.active{background:#49c3c3;transform:scale(1.2)}
+    .slide-counter{font-size:.8rem;color:#d9e4f2;min-width:48px;text-align:center}.reveal{opacity:0;transform:translateY(20px)}
+    .gradient-mesh{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}.blob{position:absolute;border-radius:50%;filter:blur(80px);animation:float-slow 12s ease-in-out infinite}.blob:nth-child(2){animation:float-drift 16s ease-in-out infinite}.blob:nth-child(3){animation:float-slow 18s ease-in-out infinite reverse}
+    @keyframes float-slow{0%{transform:translate(0,0) scale(1)}25%{transform:translate(60px,-40px) scale(1.12)}50%{transform:translate(-30px,30px) scale(.92)}75%{transform:translate(40px,25px) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
+    @keyframes float-drift{0%{transform:translate(0,0) scale(1)}33%{transform:translate(-50px,-50px) scale(1.1)}66%{transform:translate(40px,25px) scale(.9)}100%{transform:translate(0,0) scale(1)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .slide::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px 256px;opacity:.03;mix-blend-mode:overlay}
+    .slide::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 50%,var(--color-vignette) 100%)}
+    .hero-box,.card,.small-card,.photo-frame{backdrop-filter:blur(12px);box-shadow:0 20px 80px rgba(0,0,0,.18)}
+    .hero-box{background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.12)}
+    .card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:22px}
+    .small-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-radius:18px}
+    .photo-frame{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:12px}
+    .placeholder{background:linear-gradient(135deg,rgba(73,195,195,.16),rgba(255,255,255,.08));border:2px dashed rgba(255,255,255,.22);border-radius:20px}
+    .bar-track{width:100%;height:18px;border-radius:999px;background:rgba(255,255,255,.10);overflow:hidden}.bar-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#49c3c3,#8fd3ff)}
+    .product-tag{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:999px;padding:8px 14px;font-size:.9rem}
+    .two-shot{display:grid;grid-template-columns:1fr 1fr;gap:18px}.beforeafter-label{position:absolute;top:14px;left:14px;background:rgba(8,24,47,.72);border:1px solid rgba(255,255,255,.12);padding:8px 12px;border-radius:999px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
+    .location-photo{width:100%;height:100%;object-fit:cover;border-radius:18px;display:block}
+    .icon-pill{height:46px;width:46px;border-radius:14px;background:rgba(73,195,195,.18);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+    @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+  </style>
+</head>
+<body>
+<div class="mouse-spotlight" style="position:fixed;inset:0;z-index:99;pointer-events:none"></div>
+<div class="deck">
+
+<div class="slide slide-1 active" data-slide="1">
+  <div class="gradient-mesh"><div class="blob" style="width:520px;height:520px;top:-80px;right:-110px;background:var(--color-accent-1);opacity:.18"></div><div class="blob" style="width:320px;height:320px;bottom:-70px;left:-60px;background:var(--color-accent-3);opacity:.15"></div><div class="blob" style="width:220px;height:220px;top:40%;left:16%;background:var(--color-accent-2);opacity:.06"></div></div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1"></canvas>
+  <div class="content grid grid-cols-[1.1fr_0.9fr] gap-8 items-center">
+    <div>
+      <p class="reveal uppercase tracking-[0.35em] text-text-muted text-sm mb-4">Proposition premium — Manoir Fontainebleau</p>
+      <h1 class="reveal font-display text-[clamp(2.7rem,6vw,5rem)] font-black tracking-tight mb-5 bg-linear-to-br from-accent-1 via-accent-2 to-accent-1 bg-clip-text text-transparent">Le Comptoir Fontainebleau</h1>
+      <p class="reveal text-[clamp(1rem,1.75vw,1.32rem)] text-text-secondary max-w-[720px] leading-relaxed">Une solution discrète, élégante et intelligente pour offrir aux résidents un accès simple à des produits essentiels et prêts à consommer, directement dans leur milieu de vie.</p>
+      <div class="reveal mt-7 inline-flex items-center gap-3 rounded-full border border-glass-border bg-glass-bg px-6 py-3 text-sm text-text-secondary"><span>Résidences Cogir</span><span class="opacity-40">•</span><span>Manoir Fontainebleau</span><span class="opacity-40">•</span><span>Concept d’intégration sur place</span></div>
+    </div>
+    <div class="photo-frame reveal h-[500px] flex flex-col">
+      <div class="small-card p-4 mb-3 flex items-center justify-between"><span class="text-sm uppercase tracking-[0.2em] text-text-muted">Vision du service</span><span class="text-2xl">🧊</span></div>
+      <div class="placeholder flex-1 flex items-center justify-center text-center p-8">
+        <div>
+          <div class="text-[70px] mb-4">🏪</div>
+          <h3 class="text-2xl font-semibold mb-3">Insérer image premium de la machine</h3>
+          <p class="text-text-secondary leading-relaxed">Tu peux remplacer cet espace par la meilleure photo produit de votre machine ou un visuel de mise en contexte plus haut de gamme.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-2" data-slide="2">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-90px;right:-60px;background:var(--color-accent-1);opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-50px;left:-30px;background:var(--color-accent-2);opacity:.05"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Positionnement</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une solution moderne pour le confort des résidents</h2>
+    <div class="grid grid-cols-[1fr_0.95fr] gap-8 items-center">
+      <div class="card p-8 reveal">
+        <ul class="space-y-4 text-[1.06rem] text-text-secondary leading-relaxed">
+          <li>Installation d’un distributeur intelligent directement dans l’établissement, sans déplacement pour les résidents.</li>
+          <li>Accès 24 h/24 à des produits utiles du quotidien, à des repas prêts à emporter et à des options de dépannage pratique.</li>
+          <li>Format compact, silencieux et bien adapté à un environnement intérieur résidentiel.</li>
+          <li>Installation simple avec un minimum de perturbations pour les opérations courantes du Manoir Fontainebleau.</li>
+        </ul>
+      </div>
+      <div class="photo-frame reveal h-[420px]">
+        <div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🖼️</div><p class="text-xl font-semibold mb-2">Insérer image de la machine ou montage</p><p class="text-text-secondary">Emplacement inspiré du PowerPoint de votre partenaire.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-3" data-slide="3">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-60px;right:-60px;background:var(--color-accent-3);opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-60px;left:-20px;background:var(--color-accent-1);opacity:.07"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Présentation de la machine</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Pensée pour être discrète, intuitive et rassurante</h2>
+    <div class="grid grid-cols-[0.94fr_1.06fr] gap-7 items-center">
+      <div class="photo-frame reveal h-[460px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[68px] mb-4">📷</div><h3 class="text-2xl font-semibold mb-3">Photo réelle de la machine</h3><p class="text-text-secondary">Tu peux insérer ici une image pleine hauteur de la machine, comme dans le deck de ton partenaire.</p></div></div></div>
+      <div class="grid grid-cols-1 gap-4">
+        <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">❄️</div><div><h3 class="text-xl font-semibold mb-1">Design élégant style réfrigérateur</h3><p class="text-text-secondary">Apparence moderne et discrète qui s’intègre plus naturellement qu’une distributrice traditionnelle.</p></div></div>
+        <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">👆</div><div><h3 class="text-xl font-semibold mb-1">Utilisation simple</h3><p class="text-text-secondary">Accès facile, interface claire et parcours d’achat sans pression pour des résidents de tous âges.</p></div></div>
+        <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">🧠</div><div><h3 class="text-xl font-semibold mb-1">Suivi des stocks par IA</h3><p class="text-text-secondary">Réapprovisionnement facilité, meilleure disponibilité des produits et gestion plus proactive de l’inventaire.</p></div></div>
+        <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">🔇</div><div><h3 class="text-xl font-semibold mb-1">Fonctionnement silencieux</h3><p class="text-text-secondary">Aucune nuisance sonore majeure pour les résidents, le personnel ou les espaces communs adjacents.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-4" data-slide="4">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-70px;right:-60px;background:var(--color-accent-1);opacity:.08"></div><div class="blob" style="width:220px;height:220px;bottom:-40px;left:-20px;background:var(--color-accent-2);opacity:.05"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Intégration décorative</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Comparaison visuelle avant / après l’intégration</h2>
+    <div class="two-shot reveal">
+      <div class="photo-frame h-[430px] relative overflow-hidden">
+        <div class="beforeafter-label">Avant</div>
+        <img src="file:///home/user/output/image-2.jpg" alt="Emplacement actuel dans la résidence" class="location-photo">
+      </div>
+      <div class="photo-frame h-[430px] relative overflow-hidden">
+        <div class="beforeafter-label">Après</div>
+        <div class="placeholder h-full flex items-center justify-center text-center p-8">
+          <div>
+            <div class="text-[68px] mb-4">🪄</div>
+            <h3 class="text-2xl font-semibold mb-3">Insérer ici la photo modifiée</h3>
+            <p class="text-text-secondary leading-relaxed">Place la version retouchée de l’emplacement avec la machine bien intégrée dans le décor, aux bonnes couleurs et à la bonne échelle.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal mt-6 small-card p-5 text-text-secondary leading-relaxed">Cette slide répond directement à la demande de la gérante : démontrer non seulement l’emplacement, mais surtout la qualité de l’intégration visuelle dans un environnement chaleureux et soigné.</div>
+  </div>
+</div>
+
+<div class="slide slide-5" data-slide="5">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:var(--color-accent-3);opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-50px;left:-20px;background:var(--color-accent-1);opacity:.07"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Sélection de produits</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une offre centrée sur les essentiels, pas sur les snacks</h2>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="card p-7 reveal">
+        <h3 class="text-xl font-semibold mb-4 text-accent-1">Essentiels du quotidien</h3>
+        <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
+          <span class="product-tag">Lait</span><span class="product-tag">Pain</span><span class="product-tag">Brosse à dents</span><span class="product-tag">Dentifrice</span><span class="product-tag">Eau</span><span class="product-tag">Jus</span><span class="product-tag">Articles de dépannage</span>
+        </div>
+        <p class="text-text-secondary leading-relaxed">L’objectif est de répondre à un besoin concret et immédiat : éviter qu’un résident doive sortir pour un oubli, un besoin de dernière minute ou un petit achat essentiel.</p>
+      </div>
+      <div class="card p-7 reveal">
+        <h3 class="text-xl font-semibold mb-4 text-accent-1">Repas et produits valorisants</h3>
+        <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
+          <span class="product-tag">Salades</span><span class="product-tag">Sandwichs</span><span class="product-tag">Plats à emporter</span><span class="product-tag">Desserts raffinés</span><span class="product-tag">Sucreries raffinées</span><span class="product-tag">Vin</span>
+        </div>
+        <p class="text-text-secondary leading-relaxed">L’offre peut aussi bonifier l’expérience résidentielle avec des choix pratiques, soignés et plus premium, selon les préférences et les politiques de l’établissement.</p>
+      </div>
+    </div>
+    <div class="reveal mt-5 small-card p-5 text-text-secondary">La sélection demeure personnalisable après validation avec la direction et, au besoin, après un court sondage auprès des résidents.</div>
+  </div>
+</div>
+
+<div class="slide slide-6" data-slide="6">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-70px;right:-60px;background:var(--color-accent-1);opacity:.09"></div><div class="blob" style="width:240px;height:240px;bottom:-50px;left:-20px;background:var(--color-accent-2);opacity:.05"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Fonctionnement</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une expérience d’achat simple et sans friction</h2>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="card p-7 reveal"><div class="text-4xl mb-4">🔓</div><h3 class="text-xl font-semibold mb-3">1. Déverrouiller</h3><p class="text-text-secondary leading-relaxed">Le résident présente sa carte pour ouvrir la porte de façon simple, rapide et intuitive.</p></div>
+      <div class="card p-7 reveal"><div class="text-4xl mb-4">🛍️</div><h3 class="text-xl font-semibold mb-3">2. Choisir calmement</h3><p class="text-text-secondary leading-relaxed">La personne prend son temps, compare, lit l’information et peut remettre un produit sans être facturée.</p></div>
+      <div class="card p-7 reveal"><div class="text-4xl mb-4">💳</div><h3 class="text-xl font-semibold mb-3">3. Paiement automatique</h3><p class="text-text-secondary leading-relaxed">Une fois la porte refermée, seuls les produits conservés sont facturés. Aucune autre action n’est requise.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-7" data-slide="7">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-80px;right:-80px;background:var(--color-accent-3);opacity:.08"></div><div class="blob" style="width:230px;height:230px;bottom:-40px;left:-20px;background:var(--color-accent-1);opacity:.07"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Installation</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Installation fluide avec perturbation minimale</h2>
+    <div class="grid grid-cols-[1.05fr_0.95fr] gap-8 items-center">
+      <div class="space-y-4">
+        <div class="small-card p-5 reveal"><strong>1. Livraison</strong> <span class="text-text-secondary">— Machine livrée directement à l’établissement.</span></div>
+        <div class="small-card p-5 reveal"><strong>2. Coordination</strong> <span class="text-text-secondary">— Date d’installation planifiée avec la direction.</span></div>
+        <div class="small-card p-5 reveal"><strong>3. Mise en place</strong> <span class="text-text-secondary">— Installation professionnelle par notre équipe.</span></div>
+        <div class="small-card p-5 reveal"><strong>4. Mise en service</strong> <span class="text-text-secondary">— Machine opérationnelle rapidement.</span></div>
+        <div class="small-card p-5 reveal"><strong>5. Support continu</strong> <span class="text-text-secondary">— Réapprovisionnement, entretien et suivi assurés par nos soins.</span></div>
+      </div>
+      <div class="photo-frame reveal h-[420px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🚚</div><h3 class="text-2xl font-semibold mb-3">Emplacement pour image logistique</h3><p class="text-text-secondary">Tu peux garder un visuel de type livraison / installation ou le remplacer par une vraie photo de manutention.</p></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-8" data-slide="8">
+  <div class="gradient-mesh"><div class="blob" style="width:360px;height:360px;top:-70px;right:-60px;background:var(--color-accent-1);opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-60px;left:-20px;background:var(--color-accent-2);opacity:.05"></div></div>
+  <canvas class="particle-canvas-ambient" style="position:absolute;inset:0;z-index:1"></canvas>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Besoins techniques</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Nos seuls besoins : électricité et Wi-Fi</h2>
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <div class="card p-7 reveal"><h3 class="text-2xl font-semibold mb-4 text-accent-1">Alimentation électrique</h3><p class="text-text-secondary leading-relaxed">Une prise standard suffit. Aucun câblage spécial ni infrastructure lourde n’est requis pour mettre le service en place.</p></div>
+      <div class="card p-7 reveal"><h3 class="text-2xl font-semibold mb-4 text-accent-1">Accès Wi-Fi</h3><p class="text-text-secondary leading-relaxed">Connexion nécessaire pour le traitement des paiements et le suivi à distance de la machine.</p></div>
+    </div>
+    <div class="grid grid-cols-3 gap-5">
+      <div class="small-card p-5 reveal text-text-secondary">Aucune modification structurelle importante requise.</div>
+      <div class="small-card p-5 reveal text-text-secondary">Notre équipe s’occupe de la configuration technique.</div>
+      <div class="small-card p-5 reveal text-text-secondary">Déploiement planifié selon vos horaires pour limiter toute perturbation.</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-9" data-slide="9">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-70px;right:-60px;background:var(--color-accent-3);opacity:.08"></div><div class="blob" style="width:240px;height:240px;bottom:-40px;left:-20px;background:var(--color-accent-1);opacity:.07"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Partenariat</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Un partenariat basé sur la simplicité</h2>
+    <div class="grid grid-cols-[1.02fr_0.98fr] gap-8 items-center">
+      <div class="space-y-4">
+        <div class="small-card p-5 reveal"><strong>Durée initiale</strong> <span class="text-text-secondary">— À confirmer selon l’entente souhaitée avec l’établissement.</span></div>
+        <div class="small-card p-5 reveal"><strong>Responsabilités du fournisseur</strong> <span class="text-text-secondary">— Installation, entretien, réapprovisionnement et gestion complète de la machine.</span></div>
+        <div class="small-card p-5 reveal"><strong>Responsabilités de l’établissement</strong> <span class="text-text-secondary">— Fournir l’accès à l’électricité et au Wi-Fi, puis valider l’emplacement final.</span></div>
+        <div class="small-card p-5 reveal"><strong>Objectif commun</strong> <span class="text-text-secondary">— Améliorer le confort, la praticité et la qualité de vie des résidents.</span></div>
+      </div>
+      <div class="photo-frame reveal h-[400px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🤝</div><h3 class="text-2xl font-semibold mb-3">Image de partenariat</h3><p class="text-text-secondary">Tu peux conserver un visuel de poignée de main ou ajouter un élément plus premium et institutionnel.</p></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-10" data-slide="10">
+  <div class="gradient-mesh"><div class="blob" style="width:340px;height:340px;top:-60px;right:-50px;background:var(--color-accent-1);opacity:.08"></div><div class="blob" style="width:230px;height:230px;bottom:-50px;left:-20px;background:var(--color-accent-2);opacity:.05"></div></div>
+  <div class="content">
+    <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Valeur ajoutée</p>
+    <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une valeur réelle pour les résidents et pour l’établissement</h2>
+    <div class="grid grid-cols-2 gap-6 mb-6">
+      <div class="card p-7 reveal"><h3 class="text-2xl font-semibold mb-3 text-accent-1">Pour les résidents</h3><p class="text-text-secondary leading-relaxed">Accès pratique à des produits essentiels et à des repas d’appoint, sans sortir du bâtiment et sans dépendre des conditions météo ou d’un déplacement externe.</p></div>
+      <div class="card p-7 reveal"><h3 class="text-2xl font-semibold mb-3 text-accent-1">Pour la résidence</h3><p class="text-text-secondary leading-relaxed">Ajout d’un service moderne, propre et apprécié, sans charge opérationnelle lourde et avec une intégration compatible avec l’image de qualité du milieu.</p></div>
+    </div>
+    <div class="grid grid-cols-4 gap-5">
+      <div class="small-card p-5 reveal"><strong>Confort sur place</strong><p class="text-text-secondary mt-2">Service de proximité à toute heure.</p></div>
+      <div class="small-card p-5 reveal"><strong>Disponibilité 24/7</strong><p class="text-text-secondary mt-2">Accès selon le rythme de chacun.</p></div>
+      <div class="small-card p-5 reveal"><strong>Design moderne</strong><p class="text-text-secondary mt-2">Présentation propre et rassurante.</p></div>
+      <div class="small-card p-5 reveal"><strong>Expérience améliorée</strong><p class="text-text-secondary mt-2">Service distinctif pour la communauté.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide slide-11" data-slide="11">
+  <div class="gradient-mesh"><div class="blob" style="width:500px;height:500px;top:-90px;right:-90px;background:var(--color-accent-1);opacity:.17"></div><div class="blob" style="width:320px;height:320px;bottom:-70px;left:-50px;background:var(--color-accent-3);opacity:.13"></div><div class="blob" style="width:180px;height:180px;top:38%;left:18%;background:var(--color-accent-2);opacity:.07"></div></div>
+  <canvas class="particle-canvas" style="position:absolute;inset:0;z-index:1"></canvas>
+  <div class="content grid grid-cols-[1fr_0.9fr] gap-8 items-center">
+    <div>
+      <p class="reveal uppercase tracking-[0.35em] text-text-muted text-sm mb-4">Prochaine étape</p>
+      <h2 class="reveal font-display text-[clamp(2.4rem,5vw,4.2rem)] font-black tracking-tight mb-5 bg-linear-to-br from-accent-1 via-accent-2 to-accent-1 bg-clip-text text-transparent">Prêt à avancer ?</h2>
+      <div class="space-y-4 text-[1.05rem]">
+        <div class="small-card p-5 reveal"><strong>1. Confirmer l’emplacement</strong> <span class="text-text-secondary">— Valider l’endroit final dans l’établissement.</span></div>
+        <div class="small-card p-5 reveal"><strong>2. Finaliser l’offre</strong> <span class="text-text-secondary">— Confirmer les catégories de produits et le cadre de partenariat.</span></div>
+        <div class="small-card p-5 reveal"><strong>3. Préparer l’installation</strong> <span class="text-text-secondary">— Coordonner la date et les accès techniques requis.</span></div>
+        <div class="small-card p-5 reveal"><strong>4. Déployer le service</strong> <span class="text-text-secondary">— Mettre en place une solution utile dès le premier jour.</span></div>
+      </div>
+    </div>
+    <div class="photo-frame reveal h-[420px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[68px] mb-4">🏡</div><h3 class="text-2xl font-semibold mb-3">Hall de l’établissement ou visuel final</h3><p class="text-text-secondary">Tu peux reprendre ici une photo de l’emplacement ou la meilleure image finale de la machine intégrée.</p></div></div></div>
+  </div>
+</div>
+
+</div>
+<div class="nav-controls" aria-label="Navigation des diapositives"><button class="nav-btn" onclick="changeSlide(-1)" aria-label="Diapositive précédente">&#8249;</button><div class="slide-dots" id="dots"></div><button class="nav-btn" onclick="changeSlide(1)" aria-label="Diapositive suivante">&#8250;</button><span class="slide-counter" id="counter">1 / 11</span></div>
+<script>
+let current=1;const total=document.querySelectorAll('.slide').length;const dotsContainer=document.getElementById('dots');const counter=document.getElementById('counter');for(let i=1;i<=total;i++){const dot=document.createElement('div');dot.className='dot'+(i===1?' active':'');dot.onclick=()=>goToSlide(i);dotsContainer.appendChild(dot)}function goToSlide(n){const prev=document.querySelector('.slide.active');const next=document.querySelector(`.slide[data-slide="${n}"]`);if(prev)prev.classList.remove('active');if(next){next.classList.add('active');animateSlide(next)}current=n;updateNav()}function changeSlide(dir){let next=current+dir;if(next<1)next=total;if(next>total)next=1;goToSlide(next)}function updateNav(){document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i+1===current));counter.textContent=current+' / '+total}document.addEventListener('keydown',(e)=>{if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();changeSlide(1)}if(e.key==='ArrowLeft'){e.preventDefault();changeSlide(-1)}});let touchStartX=0;document.addEventListener('touchstart',(e)=>{touchStartX=e.touches[0].clientX});document.addEventListener('touchend',(e)=>{const diff=touchStartX-e.changedTouches[0].clientX;if(Math.abs(diff)>50)changeSlide(diff>0?1:-1)});function animateSlide(slide){slide.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transition='none';el.style.opacity='0';el.style.transform='translateY(20px)';el.offsetHeight;const delay=i*0.08;el.style.transition=`opacity 0.35s ease ${delay}s, transform 0.35s ease ${delay}s`;el.style.opacity='1';el.style.transform='translateY(0)' });animateSlideEffects(slide)}function animateSlideEffects(slide){slide.querySelectorAll('.bar-fill:not(.fill-init)').forEach((bar,i)=>{bar.classList.add('fill-init');bar.style.width='0%';bar.style.transition=`width 0.6s ease ${i*0.08}s`;bar.offsetHeight;bar.style.width=bar.dataset.width+'%'})}document.addEventListener('mousemove',(e)=>{const spotlight=document.querySelector('.mouse-spotlight');if(spotlight){const rgb=getComputedStyle(document.documentElement).getPropertyValue('--glow-color-rgb').trim()||'73,195,195';spotlight.style.background=`radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, rgba(${rgb}, 0.06), transparent 40%)`}});window.initParticles=function(canvas,options){if(!canvas)return;const ctx=canvas.getContext('2d');canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;const interactive=options.interactive!==false;const count=options.count||(interactive?55:18);let mx=-1000,my=-1000;const rgb=getComputedStyle(document.documentElement).getPropertyValue('--glow-color-rgb').trim()||'73,195,195';const [r,g,b]=rgb.split(',').map(Number);const particles=Array.from({length:count},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*2.5+.8,alpha:Math.random()*.35+.1}));if(interactive){canvas.addEventListener('mousemove',(e)=>{const rect=canvas.getBoundingClientRect();mx=e.clientX-rect.left;my=e.clientY-rect.top});canvas.addEventListener('mouseleave',()=>{mx=-1000;my=-1000})}(function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{if(interactive){const dx=p.x-mx,dy=p.y-my,dist=Math.sqrt(dx*dx+dy*dy)||1;if(dist<120){const force=(120-dist)/120*2;p.vx+=(dx/dist)*force*.1;p.vy+=(dy/dist)*force*.1}}p.vx*=.98;p.vy*=.98;p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(${r},${g},${b},${p.alpha})`;ctx.fill()});requestAnimationFrame(animate)})()};document.querySelectorAll('.particle-canvas').forEach(c=>window.initParticles(c,{interactive:true,count:55}));document.querySelectorAll('.particle-canvas-ambient').forEach(c=>window.initParticles(c,{interactive:false,count:18}));try{animateSlide(document.querySelector('.slide.active'))}catch(e){}
+</script>
+</body>
+</html>
