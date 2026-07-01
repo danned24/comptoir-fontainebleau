@@ -76,13 +76,20 @@
     </div>
     <div class="photo-frame reveal h-[500px] flex flex-col">
       <div class="small-card p-4 mb-3 flex items-center justify-between"><span class="text-sm uppercase tracking-[0.2em] text-text-muted">Vision du service</span><span class="text-2xl">🧊</span></div>
-      <div class="placeholder flex-1 flex items-center justify-center text-center p-8">
-        <div>
-          <div class="text-[70px] mb-4">🏪</div>
-          <h3 class="text-2xl font-semibold mb-3">Insérer image premium de la machine</h3>
-          <p class="text-text-secondary leading-relaxed">Tu peux remplacer cet espace par la meilleure photo produit de votre machine ou un visuel de mise en contexte plus haut de gamme.</p>
-        </div>
-      </div>
+<div class="flex-1 overflow-hidden rounded-2xl">
+    <video
+        autoplay
+        muted
+        loop
+        playsinline
+        controls
+        class="w-full h-full object-cover rounded-2xl">
+
+        <source src="Média1.mp4" type="video/mp4">
+
+        Votre navigateur ne supporte pas la vidéo.
+    </video>
+</div>
     </div>
   </div>
 </div>
@@ -101,9 +108,12 @@
           <li>Installation simple avec un minimum de perturbations pour les opérations courantes du Manoir Fontainebleau.</li>
         </ul>
       </div>
-      <div class="photo-frame reveal h-[420px]">
-        <div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🖼️</div><p class="text-xl font-semibold mb-2">Insérer image de la machine ou montage</p><p class="text-text-secondary">Emplacement inspiré du PowerPoint de votre partenaire.</p></div></div>
-      </div>
+<div class="photo-frame reveal h-[420px] overflow-hidden">
+    <img
+        src="Logo Comptoir Fontainebleau.png"
+        alt="Logo Comptoir Fontainebleau"
+        class="w-full h-full object-contain rounded-xl">
+</div>
     </div>
   </div>
 </div>
@@ -114,7 +124,12 @@
     <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Présentation de la machine</p>
     <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Pensée pour être discrète, intuitive et rassurante</h2>
     <div class="grid grid-cols-[0.94fr_1.06fr] gap-7 items-center">
-      <div class="photo-frame reveal h-[460px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[68px] mb-4">📷</div><h3 class="text-2xl font-semibold mb-3">Photo réelle de la machine</h3><p class="text-text-secondary">Tu peux insérer ici une image pleine hauteur de la machine, comme dans le deck de ton partenaire.</p></div></div></div>
+<div class="photo-frame reveal h-[460px] overflow-hidden">
+    <img
+        src="Machine distributrice avec vinyle en faux bois.png"
+        alt="Machine distributrice"
+        class="w-full h-full object-contain rounded-xl">
+</div>
       <div class="grid grid-cols-1 gap-4">
         <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">❄️</div><div><h3 class="text-xl font-semibold mb-1">Design élégant style réfrigérateur</h3><p class="text-text-secondary">Apparence moderne et discrète qui s’intègre plus naturellement qu’une distributrice traditionnelle.</p></div></div>
         <div class="small-card p-5 reveal flex gap-4"><div class="icon-pill">👆</div><div><h3 class="text-xl font-semibold mb-1">Utilisation simple</h3><p class="text-text-secondary">Accès facile, interface claire et parcours d’achat sans pression pour des résidents de tous âges.</p></div></div>
@@ -131,20 +146,25 @@
     <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Intégration décorative</p>
     <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Comparaison visuelle avant / après l’intégration</h2>
     <div class="two-shot reveal">
-      <div class="photo-frame h-[430px] relative overflow-hidden">
-        <div class="beforeafter-label">Avant</div>
-        <img src="file:///home/user/output/image-2.jpg" alt="Emplacement actuel dans la résidence" class="location-photo">
-      </div>
-      <div class="photo-frame h-[430px] relative overflow-hidden">
-        <div class="beforeafter-label">Après</div>
-        <div class="placeholder h-full flex items-center justify-center text-center p-8">
-          <div>
-            <div class="text-[68px] mb-4">🪄</div>
-            <h3 class="text-2xl font-semibold mb-3">Insérer ici la photo modifiée</h3>
-            <p class="text-text-secondary leading-relaxed">Place la version retouchée de l’emplacement avec la machine bien intégrée dans le décor, aux bonnes couleurs et à la bonne échelle.</p>
-          </div>
-        </div>
-      </div>
+<div class="photo-frame h-[430px] relative overflow-hidden">
+    <div class="beforeafter-label">Avant</div>
+
+    <img
+        src="emplacement de loin machine.jpg"
+        alt="Emplacement actuel"
+        class="location-photo"
+        style="object-fit:contain;background:#0b2242;">
+
+</div>
+<div class="photo-frame h-[430px] relative overflow-hidden">
+    <div class="beforeafter-label">Après</div>
+
+    <img
+    src="Dans le décor 2.png"
+    alt="Après intégration"
+    class="location-photo"
+    style="object-fit:contain;background:#0b2242;">
+</div>
     </div>
     <div class="reveal mt-6 small-card p-5 text-text-secondary leading-relaxed">Cette slide répond directement à la demande de la gérante : démontrer non seulement l’emplacement, mais surtout la qualité de l’intégration visuelle dans un environnement chaleureux et soigné.</div>
   </div>
@@ -155,23 +175,74 @@
   <div class="content">
     <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Sélection de produits</p>
     <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une offre centrée sur les essentiels, pas sur les snacks</h2>
-    <div class="grid grid-cols-2 gap-6">
-      <div class="card p-7 reveal">
-        <h3 class="text-xl font-semibold mb-4 text-accent-1">Essentiels du quotidien</h3>
-        <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
-          <span class="product-tag">Lait</span><span class="product-tag">Pain</span><span class="product-tag">Brosse à dents</span><span class="product-tag">Dentifrice</span><span class="product-tag">Eau</span><span class="product-tag">Jus</span><span class="product-tag">Articles de dépannage</span>
+<div class="grid grid-cols-[1.15fr_0.85fr] gap-8 items-start">
+
+    <div>
+
+        <div class="grid grid-cols-1 gap-6">
+
+            <div class="card p-7 reveal">
+                <h3 class="text-xl font-semibold mb-4 text-accent-1">
+                    Essentiels du quotidien
+                </h3>
+
+                <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
+                    <span class="product-tag">Lait</span>
+                    <span class="product-tag">Pain</span>
+                    <span class="product-tag">Brosse à dents</span>
+                    <span class="product-tag">Dentifrice</span>
+                    <span class="product-tag">Eau</span>
+                    <span class="product-tag">Jus</span>
+                    <span class="product-tag">Articles de dépannage</span>
+                </div>
+
+                <p class="text-text-secondary leading-relaxed">
+                    L’objectif est de répondre à un besoin concret et immédiat :
+                    éviter qu’un résident doive sortir pour un oubli ou un achat essentiel.
+                </p>
+            </div>
+
+            <div class="card p-7 reveal">
+
+                <h3 class="text-xl font-semibold mb-4 text-accent-1">
+                    Repas et produits valorisants
+                </h3>
+
+                <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
+                    <span class="product-tag">Salades</span>
+                    <span class="product-tag">Sandwichs</span>
+                    <span class="product-tag">Plats à emporter</span>
+                    <span class="product-tag">Desserts raffinés</span>
+                    <span class="product-tag">Sucreries raffinées</span>
+                    <span class="product-tag">Vin</span>
+                </div>
+
+                <p class="text-text-secondary leading-relaxed">
+                    L’offre peut aussi bonifier l’expérience résidentielle avec des
+                    choix pratiques et premium.
+                </p>
+
+            </div>
+
+            <div class="small-card p-5 reveal text-text-secondary">
+                La sélection demeure personnalisable après validation avec la direction
+                et, au besoin, après un court sondage auprès des résidents.
+            </div>
+
         </div>
-        <p class="text-text-secondary leading-relaxed">L’objectif est de répondre à un besoin concret et immédiat : éviter qu’un résident doive sortir pour un oubli, un besoin de dernière minute ou un petit achat essentiel.</p>
-      </div>
-      <div class="card p-7 reveal">
-        <h3 class="text-xl font-semibold mb-4 text-accent-1">Repas et produits valorisants</h3>
-        <div class="flex flex-wrap gap-3 text-text-secondary mb-5">
-          <span class="product-tag">Salades</span><span class="product-tag">Sandwichs</span><span class="product-tag">Plats à emporter</span><span class="product-tag">Desserts raffinés</span><span class="product-tag">Sucreries raffinées</span><span class="product-tag">Vin</span>
-        </div>
-        <p class="text-text-secondary leading-relaxed">L’offre peut aussi bonifier l’expérience résidentielle avec des choix pratiques, soignés et plus premium, selon les préférences et les politiques de l’établissement.</p>
-      </div>
+
     </div>
-    <div class="reveal mt-5 small-card p-5 text-text-secondary">La sélection demeure personnalisable après validation avec la direction et, au besoin, après un court sondage auprès des résidents.</div>
+
+    <div class="photo-frame reveal h-[620px] overflow-hidden">
+
+        <img
+            src="Comptoir Fontainebleau remplis.png"
+            alt="Comptoir Fontainebleau"
+            class="w-full h-full object-contain rounded-xl">
+
+    </div>
+
+</div>
   </div>
 </div>
 
@@ -180,11 +251,72 @@
   <div class="content">
     <p class="reveal uppercase tracking-[0.25em] text-text-muted text-sm mb-3">Fonctionnement</p>
     <h2 class="reveal font-display text-[clamp(2rem,4vw,3rem)] font-bold mb-8">Une expérience d’achat simple et sans friction</h2>
-    <div class="grid grid-cols-3 gap-6">
-      <div class="card p-7 reveal"><div class="text-4xl mb-4">🔓</div><h3 class="text-xl font-semibold mb-3">1. Déverrouiller</h3><p class="text-text-secondary leading-relaxed">Le résident présente sa carte pour ouvrir la porte de façon simple, rapide et intuitive.</p></div>
-      <div class="card p-7 reveal"><div class="text-4xl mb-4">🛍️</div><h3 class="text-xl font-semibold mb-3">2. Choisir calmement</h3><p class="text-text-secondary leading-relaxed">La personne prend son temps, compare, lit l’information et peut remettre un produit sans être facturée.</p></div>
-      <div class="card p-7 reveal"><div class="text-4xl mb-4">💳</div><h3 class="text-xl font-semibold mb-3">3. Paiement automatique</h3><p class="text-text-secondary leading-relaxed">Une fois la porte refermée, seuls les produits conservés sont facturés. Aucune autre action n’est requise.</p></div>
+<div class="grid grid-cols-[1.05fr_0.95fr] gap-8 items-start">
+
+    <div class="space-y-5">
+
+        <div class="card p-6 reveal flex gap-5">
+            <div class="text-4xl">🔓</div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-2">
+                    1. Déverrouiller
+                </h3>
+
+                <p class="text-text-secondary leading-relaxed">
+                    Le résident présente sa carte pour ouvrir la porte de façon simple,
+                    rapide et intuitive.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card p-6 reveal flex gap-5">
+
+            <div class="text-4xl">🛍️</div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-2">
+                    2. Choisir calmement
+                </h3>
+
+                <p class="text-text-secondary leading-relaxed">
+                    La personne prend son temps, compare les produits et peut remettre
+                    un article sans être facturée.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="card p-6 reveal flex gap-5">
+
+            <div class="text-4xl">💳</div>
+
+            <div>
+                <h3 class="text-xl font-semibold mb-2">
+                    3. Paiement automatique
+                </h3>
+
+                <p class="text-text-secondary leading-relaxed">
+                    Une fois la porte refermée, seuls les produits conservés sont
+                    automatiquement facturés.
+                </p>
+            </div>
+
+        </div>
+
     </div>
+
+    <div class="photo-frame reveal h-[620px] overflow-hidden">
+
+        <img
+            src="0906223b-f658-4c62-80de-0d95344fbfc2.jpg"
+            alt="Fonctionnement du lecteur de carte"
+            class="w-full h-full object-contain rounded-xl">
+
+    </div>
+
+</div>
   </div>
 </div>
 
@@ -201,7 +333,14 @@
         <div class="small-card p-5 reveal"><strong>4. Mise en service</strong> <span class="text-text-secondary">— Machine opérationnelle rapidement.</span></div>
         <div class="small-card p-5 reveal"><strong>5. Support continu</strong> <span class="text-text-secondary">— Réapprovisionnement, entretien et suivi assurés par nos soins.</span></div>
       </div>
-      <div class="photo-frame reveal h-[420px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🚚</div><h3 class="text-2xl font-semibold mb-3">Emplacement pour image logistique</h3><p class="text-text-secondary">Tu peux garder un visuel de type livraison / installation ou le remplacer par une vraie photo de manutention.</p></div></div></div>
+      <div class="photo-frame reveal h-[420px] overflow-hidden">
+
+    <img
+        src="Image3.jpg"
+        alt="Installation de la machine"
+        class="w-full h-full object-contain rounded-xl">
+
+</div>
     </div>
   </div>
 </div>
@@ -236,7 +375,14 @@
         <div class="small-card p-5 reveal"><strong>Responsabilités de l’établissement</strong> <span class="text-text-secondary">— Fournir l’accès à l’électricité et au Wi-Fi, puis valider l’emplacement final.</span></div>
         <div class="small-card p-5 reveal"><strong>Objectif commun</strong> <span class="text-text-secondary">— Améliorer le confort, la praticité et la qualité de vie des résidents.</span></div>
       </div>
-      <div class="photo-frame reveal h-[400px]"><div class="placeholder h-full flex items-center justify-center text-center p-8"><div><div class="text-[64px] mb-4">🤝</div><h3 class="text-2xl font-semibold mb-3">Image de partenariat</h3><p class="text-text-secondary">Tu peux conserver un visuel de poignée de main ou ajouter un élément plus premium et institutionnel.</p></div></div></div>
+      <div class="photo-frame reveal h-[400px] flex items-center justify-center overflow-hidden">
+
+    <img
+        src="Gemini_Generated_Image_kh7ra3kh7ra3kh7r (1).png"
+        alt="Logo Kiosque Local"
+        class="max-w-[85%] max-h-[85%] object-contain">
+
+</div>
     </div>
   </div>
 </div>
